@@ -41,4 +41,10 @@ fun main() {
     for (i in 1..100) {
         population.add(listOf(possibleAs[i], possibleBs[i], possibleCs[i], possibleDs[i], possibleEs[i]))
     }
+
+    val descendants = mutableListOf<List<Int>>()
+    for (i in 0..<population.size - 1 step 2) {
+        descendants.add(listOf(possibleAs[i], possibleBs[i], possibleCs[i], possibleDs[i + 1], possibleEs[i + 1]))
+        descendants.add(listOf(possibleAs[i + 1], possibleBs[i + 1], possibleCs[i + 1], possibleDs[i], possibleEs[i]))
+    }
 }
