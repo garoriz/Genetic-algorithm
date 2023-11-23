@@ -46,5 +46,8 @@ fun main() {
     for (i in 0..<population.size - 1 step 2) {
         descendants.add(listOf(possibleAs[i], possibleBs[i], possibleCs[i], possibleDs[i + 1], possibleEs[i + 1]))
         descendants.add(listOf(possibleAs[i + 1], possibleBs[i + 1], possibleCs[i + 1], possibleDs[i], possibleEs[i]))
+
+        a * possibleAs[i] + b + possibleBs[i] + c * possibleCs[i] + d * possibleDs[i + 1] + e * possibleEs[i + 1]
+        a * possibleAs[i + 1] + b * possibleBs[i + 1] + c * possibleCs[i + 1] + d * possibleDs[i] + e * possibleEs[i]
     }
 }
