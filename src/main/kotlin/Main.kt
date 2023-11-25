@@ -1,3 +1,5 @@
+import kotlin.math.abs
+
 fun main() {
     val a = 3
     val b = 47
@@ -49,5 +51,9 @@ fun main() {
 
         a * possibleAs[i] + b + possibleBs[i] + c * possibleCs[i] + d * possibleDs[i + 1] + e * possibleEs[i + 1]
         a * possibleAs[i + 1] + b * possibleBs[i + 1] + c * possibleCs[i + 1] + d * possibleDs[i] + e * possibleEs[i]
+    }
+
+    val sortedDescendants = descendants.sortedBy {
+        abs(f - (a * it[0] + b + it[1] + c * it[2] + d * it[3] + e * it[4]))
     }
 }
