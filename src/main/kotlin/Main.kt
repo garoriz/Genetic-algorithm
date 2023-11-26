@@ -1,12 +1,13 @@
 import kotlin.math.abs
+import kotlin.random.Random
 
 fun main() {
-    val a = 3
-    val b = 47
-    val c = 37
-    val d = 90
-    val e = 67
-    val f = 9990
+    val a = 1
+    val b = 1
+    val c = 1
+    val d = 1
+    val e = 1
+    val f = 1000
 
     val possibleAs = mutableListOf<Int>()
     for (i in 1..f / a) {
@@ -53,7 +54,32 @@ fun main() {
         a * possibleAs[i + 1] + b * possibleBs[i + 1] + c * possibleCs[i + 1] + d * possibleDs[i] + e * possibleEs[i]
     }
 
-    val sortedDescendants = descendants.sortedBy {
-        abs(f - (a * it[0] + b + it[1] + c * it[2] + d * it[3] + e * it[4]))
+    val probabilities = descendants.map { element ->
+        val value = a * element[0] + b * element[1] + c * element[2] + d * element[3] + e * element[4]
+        1 / (1 + abs(f - value).toDouble())
+    }.toDoubleArray()
+
+    val selectedIndices = mutableSetOf<Int>()
+    val numSelectedElements = 10
+
+    repeat(numSelectedElements) {
+        val selectedIndex = rouletteWheelSelection(probabilities)
+        selectedIndices.add(selectedIndex)
     }
+
+    val selectedDescendants = selectedIndices.map { descendants[it] }
+}
+
+fun rouletteWheelSelection(weights: DoubleArray): Int {
+    val totalWeight = weights.sum()
+    var randomValue = Random.nextDouble() * totalWeight
+
+    for (i in weights.indices) {
+        randomValue -= weights[i]
+        if (randomValue <= 0) {
+            return i
+        }
+    }
+
+    return weights.size - 1
 }
