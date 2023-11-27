@@ -9,6 +9,8 @@ fun main() {
     val e = 1
     val f = 1000
 
+    var nearestResult = Int.MAX_VALUE
+
     val possibleAs = mutableListOf<Int>()
     for (i in 1..f / a) {
         possibleAs.add(i)
@@ -68,6 +70,15 @@ fun main() {
     }
 
     val selectedDescendants = selectedIndices.map { descendants[it] }
+
+    var isChange = false
+    for (descendant in selectedDescendants) {
+        val value = a * descendant[0] + b * descendant[1] + c * descendant[2] + d * descendant[3] + e * descendant[4]
+        if (abs(f - value) < nearestResult) {
+            isChange = true
+            nearestResult = value
+        }
+    }
 }
 
 fun rouletteWheelSelection(weights: DoubleArray): Int {
